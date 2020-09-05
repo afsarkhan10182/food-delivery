@@ -90,6 +90,16 @@ Route::get('delivery/status/{id}','DeliveryController@status');
 
 /*
 |-------------------------------
+|Reporting
+|-------------------------------
+*/
+Route::get('report','ReportController@index');
+Route::post('report','ReportController@report');
+Route::get('payment','ReportController@payment');
+Route::get('paymentReport','ReportController@paymentReport');
+
+/*
+|-------------------------------
 |Manage Orders
 |-------------------------------
 */

@@ -118,6 +118,19 @@
 </ul>
 </li>
 
+<li class="menu-item @if($page === 'delivery') active @endif">
+<a href="{{ Asset(env('user').'/delivery') }}" class=" menu-link">
+<span class="menu-label">
+<span class="menu-name">Delivery Boys</span>
+</span>
+<span class="menu-icon">
+<i class="icon-placeholder  mdi mdi-folder-plus">
+
+</i>
+</span>
+</a>
+</li>
+
 <li class="menu-item @if($page === 'order') active @endif">
 <a href="#" class="open-dropdown menu-link">
 <span class="menu-label">
@@ -214,6 +227,19 @@ if($cOrder > 0)
 </a>
 </li>
 </ul>
+</li>
+
+<li class="menu-item @if($page === 'report') active @endif">
+<a href="{{ Asset(env('user').'/report') }}" class=" menu-link">
+<span class="menu-label">
+<span class="menu-name">Reporting</span>
+</span>
+<span class="menu-icon">
+<i class="icon-placeholder  mdi mdi-folder-plus">
+
+</i>
+</span>
+</a>
 </li>
 
 <li class="menu-item">

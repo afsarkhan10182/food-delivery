@@ -222,7 +222,7 @@
 </div>
 </div>
 
-<h1 style="font-size: 20px">Wallet details:</h1>
+<h1 style="font-size: 20px">Credit details:</h1>
 <div class="card py-3 m-b-30">
 <div class="card-body">
 
@@ -236,7 +236,7 @@
 </select>
 </div>
 <div class="form-group col-md-4">
-<label for="inputEmail4">Add Money to the wallet</label>
+<label for="inputEmail4">Add Money</label>
 {!! Form::text('add_money','',['placeholder' => 'Enter the amount','class' => 'form-control'])!!}
 </div>
 @endif
@@ -244,7 +244,7 @@
     {{-- <a href="{{ Asset(env('admin').'/addMoneyToWallet/'.$data->id) }}" class="btn btn-success">Pay</a> --}}
 {{-- </div> --}}
 <div class="form-group col-md-3">
-<label for="inputEmail4">Balance Amount</label>
+<label for="inputEmail4">Credit Balance</label>
 </div>
 <div class="form-group col-md-3">
 {!! Form::text('balance_amount', $data['id'] ? $data->balanceAmount($data['balance_amount'], $data['id']):0,['disabled' => 'disabled','placeholder' => 'NULL','class' => 'form-control'])!!}
@@ -265,7 +265,7 @@
 </div>
 <div class="form-row">
     <div class="form-group col-md-2">
-        <label for="inputEmail4">Wallet Expires:</label>
+        <label for="inputEmail4">Credit Expires:</label>
     </div>
     <div class="form-group col-md-1">
         <label for="inputEmail4">From Date</label>

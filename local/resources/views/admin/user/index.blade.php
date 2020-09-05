@@ -63,7 +63,7 @@
 <a href="javascript::void()" class="btn m-b-15 ml-2 mr-2 btn-md  btn-rounded-circle <?php if($row->trending == 1){ echo "btn-success"; } else { echo "btn-warning"; } ?>" data-toggle="tooltip" data-placement="top" data-original-title="<?php if($row->trending == 1){ echo "in Trending"; } else { echo "Make Trending"; } ?>" onclick="confirmAlert('{{ Asset($link.'status/'.$row->id.'?type=trend') }}')"><i class="mdi mdi-trending-up"></i></a>
 
 
-<a href="{{ Asset(env('admin').'/loginWithID/'.$row->id) }}" class="btn m-b-15 ml-2 mr-2 btn-md  btn-rounded-circle btn-info" data-toggle="tooltip" data-placement="top" data-original-title="Login as User" target="_blank"><i class="mdi mdi-login"></i></a>
+{{-- <a href="{{ Asset(env('admin').'/loginWithID/'.$row->id) }}" class="btn m-b-15 ml-2 mr-2 btn-md  btn-rounded-circle btn-info" data-toggle="tooltip" data-placement="top" data-original-title="Login as User" target="_blank"><i class="mdi mdi-login"></i></a> --}}
 
 {{-- <a href="javascript::void()" class="btn m-b-15 ml-2 mr-2 btn-md  btn-rounded-circle btn-primary" data-toggle="tooltip" data-placement="top" data-original-title="View Login Details" onclick="showMsg('Username : {{ $row->email }}<br>Password : {{ $row->shw_password }}')"><i class="mdi mdi-lock"></i></a> --}}
 

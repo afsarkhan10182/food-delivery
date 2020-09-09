@@ -23,7 +23,7 @@ class User extends Authenticatable
 
                 'name'      => 'required',
                 'phone'     => 'required|numeric',
-                'img'       => 'required|mimes:jpeg,png,jpg,svg|max:2048',
+                'img'       => 'mimes:jpeg,png,jpg,svg|max:2048',
                 'email'     => 'required|unique:users',
                 'password'  => 'required|min:6',
 
@@ -33,7 +33,7 @@ class User extends Authenticatable
 
                 'name'      => 'required',
                 'phone'     => 'required|numeric',
-                'img'       => 'required|mimes:jpeg,png,jpg,svg|max:2048',
+                'img'       => 'mimes:jpeg,png,jpg,svg|max:2048',
                 'email'     => 'required|unique:users,email,' . $type,
 
             ];
@@ -64,6 +64,7 @@ class User extends Authenticatable
         $add->name                  = isset($data['name']) ? $data['name'] : null;
         $add->phone                 = isset($data['phone']) ? $data['phone'] : null;
         $add->postcode              = isset($data['postcode']) ? $data['postcode'] : null;
+        $add->license_number              = isset($data['license_number']) ? $data['license_number'] : null;
         $add->email                 = isset($data['email']) ? $data['email'] : null;
         $add->status                = isset($data['status']) ? $data['status'] : 0;
         $add->city_id               = isset($data['city_id']) ? $data['city_id'] : 0;
@@ -215,6 +216,7 @@ class User extends Authenticatable
                 'logo'          => $admin->logo ? Asset('upload/admin/' . $admin->logo) : null,
                 'phone'         => $row->phone,
                 'postcode'      => $row->postcode,
+                'license_number'=> $row->license_number,
                 'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                 'open_time'     => date('h:i:A', strtotime($row->opening_time)),
                 'close_time'    => date('h:i:A', strtotime($row->closing_time)),

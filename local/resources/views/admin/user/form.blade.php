@@ -39,20 +39,24 @@
 <div class="card-body">
 
 <div class="form-row">
-<div class="form-group col-md-6">
+<div class="form-group col-md-4">
 <label for="inputEmail6">Name</label>
 {!! Form::text('name',null,['required' => 'required','placeholder' => 'Name','class' => 'form-control'])!!}
 </div>
-<div class="form-group col-md-6">
+<div class="form-group col-md-4">
 <label for="inputEmail4">Email (<i>This will be username</i>)</label>
 {!! Form::email('email',null,['required' => 'required','placeholder' => 'Email Address','class' => 'form-control'])!!}
 </div>
+<div class="form-group col-md-4">
+    <label for="inputEmail6">Phone</label>
+    {!! Form::text('phone',null,['required' => 'required','placeholder' => 'Contact Number','class' => 'form-control'])!!}
+    </div>
 </div>
 
 <div class="form-row">
 <div class="form-group col-md-3">
-<label for="inputEmail6">Phone</label>
-{!! Form::text('phone',null,['required' => 'required','placeholder' => 'Contact Number','class' => 'form-control'])!!}
+<label for="inputEmail6">License Number</label>
+{!! Form::text('license_number',null,['required' => 'required','placeholder' => 'Enter License number','class' => 'form-control'])!!}
 </div>
 
 <div class="form-group col-md-3">

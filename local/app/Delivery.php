@@ -22,7 +22,7 @@ class Delivery extends Authenticatable
         {
             return [
 
-            'phone' => 'required|unique:delivery_boys',
+            'phone' => 'required|numeric|unique:delivery_boys',
 
             ];
         }
@@ -30,7 +30,7 @@ class Delivery extends Authenticatable
         {
             return [
 
-            'phone'     => 'required|unique:delivery_boys,phone,'.$type,
+            'phone'     => 'required|numeric|unique:delivery_boys,phone,'.$type,
 
             ];
         }

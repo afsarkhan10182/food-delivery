@@ -86,7 +86,7 @@
 {!! Form::text('address',null,['required' => 'required','placeholder' => 'Full Address','class' => 'form-control'])!!}
 </div>
 <div class="form-group col-md-6">
-<label for="inputEmail4">Image (recommended size 600 * 400)</label>
+<label for="inputEmail4">Image (Accept Format: jpeg, png, jpg, svg)</label>
 <input type="file" name="img" class="form-control" @if(!$data->id) required="required" @endif>
 </div>
 </div>

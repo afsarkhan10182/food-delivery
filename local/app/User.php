@@ -22,7 +22,8 @@ class User extends Authenticatable
             return [
 
                 'name'      => 'required',
-                'phone'     => 'required',
+                'phone'     => 'required|numeric',
+                'img'       => 'required|mimes:jpeg,png,jpg,svg|max:2048',
                 'email'     => 'required|unique:users',
                 'password'  => 'required|min:6',
 
@@ -31,7 +32,8 @@ class User extends Authenticatable
             return [
 
                 'name'      => 'required',
-                'phone'    => 'required',
+                'phone'     => 'required|numeric',
+                'img'       => 'required|mimes:jpeg,png,jpg,svg|max:2048',
                 'email'     => 'required|unique:users,email,' . $type,
 
             ];

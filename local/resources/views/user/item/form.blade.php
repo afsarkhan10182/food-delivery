@@ -69,7 +69,7 @@
 </div>
 
 <div class="form-group col-md-6">
-<label for="inputEmail6">Image</label>
+<label for="inputEmail6">Image (Accept Format: jpeg, png, jpg, svg)</label>
 <input type="file" name="img" class="form-control">
 </div>
 </div>
@@ -87,19 +87,43 @@
 </div>
 
 <div class="form-row">
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
+<label for="inputEmail6">Kids Price</label>
+{!! Form::text('kids_price',null,['id' => 'code','placeholder' => 'Kids Quantity Price','class' => 'form-control'])!!}
+</div>
+<div class="form-group col-md-3">
 <label for="inputEmail6">Small Price</label>
 {!! Form::text('small_price',null,['id' => 'code','placeholder' => 'Small Quantity Price','class' => 'form-control'])!!}
 </div>
 
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
 <label for="inputEmail6">Medium Price</label>
 {!! Form::text('medium_price',null,['id' => 'code','placeholder' => 'Medium Quantity Price','class' => 'form-control'])!!}
 </div>
 
-<div class="form-group col-md-4">
+<div class="form-group col-md-3">
 <label for="inputEmail6">Large/Full Price</label>
 {!! Form::text('large_price',null,['id' => 'code','placeholder' => 'Large Quantity Price','class' => 'form-control'])!!}
+</div>
+</div>
+<div class="form-row">
+<div class="form-group col-md-3">
+<label for="inputEmail6">Discount Kids Price</label>
+{!! Form::text('discount_kids_price',null,['id' => 'code','placeholder' => 'Discount Kids Quantity Price','class' => 'form-control'])!!}
+</div>
+<div class="form-group col-md-3">
+<label for="inputEmail6">Discount Small Price</label>
+{!! Form::text('discount_small_price',null,['id' => 'code','placeholder' => 'Discount Small Quantity Price','class' => 'form-control'])!!}
+</div>
+
+<div class="form-group col-md-3">
+<label for="inputEmail6">Discount Medium Price</label>
+{!! Form::text('discount_medium_price',null,['id' => 'code','placeholder' => 'Discount Medium Quantity Price','class' => 'form-control'])!!}
+</div>
+
+<div class="form-group col-md-3">
+<label for="inputEmail6">Discount Large/Full Price</label>
+{!! Form::text('discount_large_price',null,['id' => 'code','placeholder' => 'Discount Large Quantity Price','class' => 'form-control'])!!}
 </div>
 </div>
 </div>

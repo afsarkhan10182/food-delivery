@@ -12,15 +12,15 @@
 
 
 <div class=" text-center">
-<h3 style="font-size: 19px">Total Store</h3>
+<h3 style="font-size: 19px"><a href="{{ Asset(env('admin').'/user') }}">Total Store</a></h3>
 </div>
-<div class="text-overline ">
-{{ $overview['store'] }}
-</div>
-</div>
+<div class="text-overline "><a href="{{ Asset(env('admin').'/user') }}">
+{{ $overview['store'] }}</a>
 </div>
 </div>
-<div class="col m-b-30">
+</div>
+</div>
+{{-- <div class="col m-b-30">
 <div class="card ">
 <div class="   text-center card-body">
 <div class="text-danger   ">
@@ -38,8 +38,8 @@
 <div class="text-overline ">{{ $overview['order'] }}</div>
 </div>
 </div>
-</div>
-<div class="col m-b-30">
+</div> --}}
+{{-- <div class="col m-b-30">
 <div class="card ">
 <div class="   text-center card-body">
 <div class="text-warning   ">
@@ -57,8 +57,8 @@
 <div class="text-overline ">{{ $overview['complete'] }}</div>
 </div>
 </div>
-</div>
-<div class="col m-b-30">
+</div> --}}
+{{-- <div class="col m-b-30">
 <div class="card ">
 <div class="   text-center card-body">
 <div class="text-info   ">
@@ -76,7 +76,7 @@
 <div class="text-overline ">{{ $overview['month'] }}</div>
 </div>
 </div>
-</div>
+</div> --}}
 <div class="col d-lg-block d-none m-b-30">
 <div class="card ">
 <div class="   text-center card-body">
@@ -90,9 +90,9 @@
 
 
 <div class=" text-center">
-<h3 style="font-size: 19px">App Users</h3>
+<h3 style="font-size: 19px"><a href="{{ Asset(env('admin').'/appUser') }}">App Users</a></h3>
 </div>
-<div class="text-overline ">{{ $overview['user'] }}</div>
+<div class="text-overline "><a href="{{ Asset(env('admin').'/appUser') }}">{{ $overview['user'] }}</a></div>
 </div>
 </div>
 </div>

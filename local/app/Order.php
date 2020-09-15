@@ -458,19 +458,24 @@ class Order extends Authenticatable
 
       $data = [];
 
+      if($item->kids_price)
+      {
+         $data[] = ['id' => 1,'name' => "Kids - Rs.".($item->discount_kids_price ? $item->discount_kids_price : $item->kids_price)];
+      }
+
       if($item->small_price)
       {
-         $data[] = ['id' => 1,'name' => "Small - Rs.".$item->small_price];
+         $data[] = ['id' => 2,'name' => "Small - Rs.".($item->discount_small_price ? $item->discount_small_price : $item->small_price)];
       }
 
       if($item->medium_price)
       {
-         $data[] = ['id' => 2,'name' => "Medium - Rs.".$item->medium_price];
+         $data[] = ['id' => 3,'name' => "Medium - Rs.".($item->discount_medium_price ? $item->discount_medium_price : $item->medium_price)];
       }
 
       if($item->large_price)
       {
-         $data[] = ['id' => 3,'name' => "Large/Full - Rs.".$item->large_price];
+         $data[] = ['id' => 4,'name' => "Large/Full - Rs.".($item->discount_large_price ? $item->discount_large_price : $item->large_price)];
       }
 
       return $data;

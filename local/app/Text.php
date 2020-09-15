@@ -45,6 +45,7 @@ class Text extends Authenticatable
             'item_add_button' 			=> $data['item_add_button'][$i],
             'item_addon_title' 			=> $data['item_addon_title'][$i],
             'item_size_heading'         => $data['item_size_heading'][$i],
+            'item_kids'                 => $data['item_kids'][$i],
             'item_small'                => $data['item_small'][$i],
             'item_m'                    => $data['item_m'][$i],
             'item_large'                => $data['item_large'][$i],

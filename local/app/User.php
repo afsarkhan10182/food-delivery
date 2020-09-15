@@ -216,7 +216,7 @@ class User extends Authenticatable
                 'logo'          => $admin->logo ? Asset('upload/admin/' . $admin->logo) : null,
                 'phone'         => $row->phone,
                 'postcode'      => $row->postcode,
-                'license_number'=> $row->license_number,
+                'license_number' => $row->license_number,
                 'rating'        => $avg > 0 ? number_format($avg, 1) : '0.0',
                 'open_time'     => date('h:i:A', strtotime($row->opening_time)),
                 'close_time'    => date('h:i:A', strtotime($row->closing_time)),
@@ -312,12 +312,22 @@ class User extends Authenticatable
             $count = [];
 
             foreach ($items as $i) {
-                if ($i->small_price) {
+                if ($i->kids_price) {
+                    $discount_price = $i->discount_kids_price;
+                    $price = $i->kids_price;
+                } elseif (!$i->kids_price && $i->small_price) {
+                    $discount_price = $i->discount_small_price;
                     $price = $i->small_price;
-                } elseif (!$i->small_price && $i->medium_price) {
+                } elseif (!$i->kids_price && !$i->small_price && $i->medium_price) {
+                    $discount_price = $i->discount_medium_price;
                     $price = $i->medium_price;
-                } elseif (!$i->small_price && !$i->medium_price) {
+                } elseif (!$i->kids_price && !$i->small_price && !$i->medium_price) {
+                    $discount_price = $i->discount_large_price;
                     $price = $i->large_price;
+                }
+
+                if ($i->kids_price) {
+                    $count[] = $i->kids_price;
                 }
 
                 if ($i->small_price) {
@@ -338,10 +348,16 @@ class User extends Authenticatable
                     'name'          => $this->getLangItem($i->id, $_GET['lid'])['name'],
                     'img'           => $i->img ? Asset('upload/item/' . $i->img) : null,
                     'description'   => $this->getLangItem($i->id, $_GET['lid'])['desc'],
+                    'k_price'       => $i->kids_price,
                     's_price'       => $i->small_price,
                     'm_price'       => $i->medium_price,
                     'l_price'       => $i->large_price,
+                    'd_k_price'     => $i->discount_kids_price,
+                    'd_s_price'     => $i->discount_small_price,
+                    'd_m_price'     => $i->discount_medium_price,
+                    'd_l_price'     => $i->discount_large_price,
                     'price'         => $price,
+                    'discount_price' => $discount_price,
                     'count'         => count($count),
                     'nonveg'        => $i->nonveg,
                     'addon'         => $this->addon($i->id),
@@ -443,7 +459,7 @@ class User extends Authenticatable
     {
         $data['store_id'] = $id;
         $res = new Order;
-        $getOrder  = $res->getReport($data);   
+        $getOrder  = $res->getReport($data);
         $com[] = '';
         foreach ($getOrder as $row) {
             $com[] = $this->getCom($row['id'], $row['amount']);

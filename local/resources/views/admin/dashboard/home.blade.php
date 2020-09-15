@@ -11,10 +11,10 @@
 
 @include('admin.dashboard.overview')
 
-@include('admin.dashboard.order')
+{{-- @include('admin.dashboard.order') --}}
 
 
-@include('admin.dashboard.chart')
+{{-- @include('admin.dashboard.chart') --}}
 
 
 </div>

@@ -197,12 +197,16 @@
 <label for="inputEmail6">Addon Page Title</label>
 <input type="text" name="item_addon_title[]" class="form-control" value="{{ $data->getSData($l['id'],'item_addon_title') }}">
 </div>
+<div class="form-group col-md-4">
+<label for="inputEmail6">Select Size Heading</label>
+<input type="text" name="item_size_heading[]" class="form-control" value="{{ $data->getSData($l['id'],'item_size_heading') }}">
+</div>
 </div>
 
 <div class="form-row">
 <div class="form-group col-md-4">
-<label for="inputEmail6">Select Size Heading</label>
-<input type="text" name="item_size_heading[]" class="form-control" value="{{ $data->getSData($l['id'],'item_size_heading') }}">
+<label for="inputEmail6">Kids</label>
+<input type="text" name="item_kids[]" class="form-control" value="{{ $data->getSData($l['id'],'item_kids') }}">
 </div>
 
 <div class="form-group col-md-4">

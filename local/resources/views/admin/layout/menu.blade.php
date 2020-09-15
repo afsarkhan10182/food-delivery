@@ -181,7 +181,7 @@
 </li>
 @endif
 
-@if ($admin->hasPerm('Delivery Boys') || $admin->hasPerm('ALL'))
+@if ($admin->hasPerm('Delivery Boys'))
 <li class="menu-item @if($page === 'delivery') active @endif">
 <a href="{{ Asset(env('admin').'/delivery') }}" class="menu-link">
 <span class="menu-label"><span class="menu-name">Delivery Boys</span></span>
@@ -203,7 +203,7 @@
 </li>
 @endif
 
-@if ($admin->hasPerm('Manage Orders') || $admin->hasPerm('ALL'))
+@if ($admin->hasPerm('Manage Orders'))
 <li class="menu-item @if($page === 'order') active @endif">
 <a href="#" class="open-dropdown menu-link">
 <span class="menu-label">

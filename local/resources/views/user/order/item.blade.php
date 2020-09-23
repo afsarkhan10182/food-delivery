@@ -30,7 +30,7 @@
 
 <div class="form-group col-md-3">
 <label for="class_{{ $uid }}">Quantity</label>
-<input type="text" name="qty[]" class="form-control" value="{{ $d->qty }}">
+<input type="number" name="qty[]" required="required" class="form-control" value="{{ $d->qty }}">
 </div>
 
 <div class="form-group col-md-1">
@@ -63,7 +63,7 @@ if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	document.getElementById("unit{{ $uid }}").innerHTML=xmlhttp.responseText;
 }
 }
-	xmlhttp.open("GET","{{ Asset(env('admin').'/getUnit') }}/"+id,true);
+	xmlhttp.open("GET","{{ Asset(env('user').'/getUnit') }}/"+id,true);
 	xmlhttp.send();
 }
 
@@ -99,7 +99,7 @@ if (xmlhttp.readyState==4 && xmlhttp.status==200)
 
 <div class="form-group col-md-3">
 <label for="class_{{ $uid }}">Quantity</label>
-<input type="text" name="qty[]" class="form-control">
+<input type="number" name="qty[]" required="required" class="form-control" required="required">
 </div>
 
 <div class="form-group col-md-1">
@@ -132,7 +132,7 @@ if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	document.getElementById("unit{{ $uid }}").innerHTML=xmlhttp.responseText;
 }
 }
-	xmlhttp.open("GET","{{ Asset(env('admin').'/getUnit') }}/"+id,true);
+	xmlhttp.open("GET","{{ Asset(env('user').'/getUnit') }}/"+id,true);
 	xmlhttp.send();
 }
 

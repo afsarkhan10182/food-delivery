@@ -87,7 +87,7 @@ if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	}
 }
 }
-	xmlhttp.open("GET","{{ Asset(env('admin').'/getUser') }}/"+id,true);
+	xmlhttp.open("GET","{{ Asset(env('user').'/getUser') }}/"+id,true);
 	xmlhttp.send();
 }
 
@@ -95,7 +95,7 @@ function AddMore() {
     
     var sid = document.getElementById("store_id").value;
 	
-	$("<DIV>").load("{{ Asset(env('admin').'/orderItem?store_id=') }}"+sid, function() {
+	$("<DIV>").load("{{ Asset(env('user').'/orderItem?store_id=') }}"+sid, function() {
 	
 	$("#item").append($(this).html());
 	

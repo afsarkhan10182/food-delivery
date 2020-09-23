@@ -54,7 +54,7 @@ class OrderController extends Controller {
 			'link' 		=> 'order/',
 			'title' 	=> $title,
 			'item'		=> new OrderItem,
-			'boys'		=> Delivery::where('status',0)->where('store_id',0)->get(),
+			'boys'		=> Delivery::where('status',1)->where('store_id',Auth::user()->id)->get(),
 			'form_url'	=> 'order/dispatched',
 			'currency'	=> Admin::find(1)->currency
 		]);

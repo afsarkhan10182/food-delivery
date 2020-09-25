@@ -6,8 +6,8 @@
 </style>
 <div class="admin-sidebar-brand">
 <!-- begin sidebar branding-->
-<img class="admin-brand-logo" src="{{Asset('assets/img/logo.png') }}" width="40" alt="atmos Logo">
-<span class="admin-brand-content font-secondary"><a href="{{ Asset(env('user').'/home') }}">  Admin</a></span>
+<img class="admin-brand-logo" src="{{Asset('assets/img/R.png') }}" width="40" alt="atmos Logo">
+<span class="admin-brand-content font-secondary"><a href="{{ Asset(env('user').'/home') }}">  Restaurant</a></span>
 <!-- end sidebar branding-->
 <div class="ml-auto">
 <!-- sidebar pin-->

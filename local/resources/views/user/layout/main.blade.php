@@ -7,8 +7,8 @@
 <meta name="apple-touch-fullscreen" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>@yield('title')</title>
-<link rel="icon" type="image/x-icon" href="{{Asset('assets/img/logo.png') }}"/>
-<link rel="icon" href="{{Asset('assets/img/logo.png')}}" type="image/png" sizes="16x16">
+<link rel="icon" type="image/x-icon" href="{{Asset('assets/img/R.png') }}"/>
+<link rel="icon" href="{{Asset('assets/img/R.png')}}" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="{{Asset('assets/vendor/pace/pace.css')}}">
 <script src="{{Asset('assets/vendor/pace/pace.min.js')}}"></script>
 <link rel="stylesheet" type="text/css" href="{{Asset('assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}">

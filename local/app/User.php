@@ -64,7 +64,7 @@ class User extends Authenticatable
         $add->name                  = isset($data['name']) ? $data['name'] : null;
         $add->phone                 = isset($data['phone']) ? $data['phone'] : null;
         $add->postcode              = isset($data['postcode']) ? $data['postcode'] : null;
-        $add->license_number              = isset($data['license_number']) ? $data['license_number'] : null;
+        $add->license_number        = isset($data['license_number']) ? $data['license_number'] : null;
         $add->email                 = isset($data['email']) ? $data['email'] : null;
         $add->status                = isset($data['status']) ? $data['status'] : 0;
         $add->city_id               = isset($data['city_id']) ? $data['city_id'] : 0;
@@ -104,14 +104,6 @@ class User extends Authenticatable
             $add->closing_time   = $data['closing_time'];
         }
 
-
-        // $data['balance_amount'] = 
-        // $add->balance_amount   = $data['balance_amount'] - array_sum($com);
-        // echo "<pre>";
-        // print_r($data);
-        // print_r($add);
-        // die;
-
         if (isset($data['add_money'])) {
             $add->balance_amount      += $data['add_money'];
             $add->wallet_expire_from = now();
@@ -121,9 +113,6 @@ class User extends Authenticatable
 
         $gallery = new UserImage;
         $gallery->addNew($data, $add->id);
-
-        // $wallet = new UserWallet;
-        // $wallet->addNew($data, $add->id);
     }
 
     /*
@@ -418,7 +407,8 @@ class User extends Authenticatable
             'complete'  => Order::where('store_id', Auth::user()->id)->where('status', 4)->count(),
             'month'     => Order::where('store_id', Auth::user()->id)->whereDate('created_at', 'LIKE', date('Y-m') . '%')
                 ->count(),
-            'items'     => Item::where('store_id', Auth::user()->id)->where('status', 0)->count()
+            'items'     => Item::where('store_id', Auth::user()->id)->where('status', 0)->count(),
+            'balance_amount'     => User::find(Auth::user()->id)->balance_amount
 
         ];
     }
@@ -455,15 +445,27 @@ class User extends Authenticatable
         return $val;
     }
 
-    public function balanceAmount($balance_amount, $id)
+    public function getComPerOrder($id, $total)
     {
-        $data['store_id'] = $id;
-        $res = new Order;
-        $getOrder  = $res->getReport($data);
-        $com[] = '';
-        foreach ($getOrder as $row) {
-            $com[] = $this->getCom($row['id'], $row['amount']);
+        $order = Order::find($id);
+        if ($order->commision_type == 0) {
+            $val = $order->commision_value;
+        } else {
+            $val = round($total * $order->commision_value / 100);
         }
-        return $balance_amount - array_sum($com);
+        return $val;
+    }
+
+    public function balanceAmount($amount, $id)
+    {
+        $commision = $this->getComPerOrder($id, $amount);
+        $order = Order::find($id);
+        return $order->balance_amount - $commision;
+    }
+
+    public function userTotalbalanceAmount($id)
+    {
+        $user = User::find($id);
+        return $user->balance_amount;
     }
 }

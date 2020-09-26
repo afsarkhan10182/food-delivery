@@ -161,9 +161,5 @@ class UserController extends Controller
 			return Redirect::to('login')->with('error', 'Something went wrong.');
 		}
 	}
-	public function addMoneyToWallet(Request $Request, $id)
-	{
-		// echo "hi";die;
-		return redirect::back()->with('message', 'Added Successfully.');
-	}
+	
 }

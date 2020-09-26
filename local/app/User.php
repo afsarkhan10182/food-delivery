@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Validator;
 use Auth;
 use DB;
+use App\Admin;
 
 class User extends Authenticatable
 {
@@ -57,25 +58,28 @@ class User extends Authenticatable
 
     public function addNew($data, $type)
     {
-
-        $a                          = isset($data['lid']) ? array_combine($data['lid'], $data['l_name']) : [];
-        $b                          = isset($data['lid']) ? array_combine($data['lid'], $data['l_address']) : [];
-        $add                        = $type === 'add' ? new User : User::find($type);
-        $add->name                  = isset($data['name']) ? $data['name'] : null;
-        $add->phone                 = isset($data['phone']) ? $data['phone'] : null;
-        $add->postcode              = isset($data['postcode']) ? $data['postcode'] : null;
-        $add->license_number        = isset($data['license_number']) ? $data['license_number'] : null;
-        $add->email                 = isset($data['email']) ? $data['email'] : null;
-        $add->status                = isset($data['status']) ? $data['status'] : 0;
-        $add->city_id               = isset($data['city_id']) ? $data['city_id'] : 0;
-        $add->address               = isset($data['address']) ? $data['address'] : 0;
-        $add->delivery_time         = isset($data['delivery_time']) ? $data['delivery_time'] : null;
-        $add->person_cost           = isset($data['person_cost']) ? $data['person_cost'] : null;
-        $add->lat                   = isset($data['lat']) ? $data['lat'] : null;
-        $add->lng                   = isset($data['lng']) ? $data['lng'] : null;
-        $add->type                  = isset($data['store_type']) ? $data['store_type'] : null;
-        $add->min_cart_value        = isset($data['min_cart_value']) ? $data['min_cart_value'] : null;
+        $a                           = isset($data['lid']) ? array_combine($data['lid'], $data['l_name']) : [];
+        $b                           = isset($data['lid']) ? array_combine($data['lid'], $data['l_address']) : [];
+        $add                         = $type === 'add' ? new User : User::find($type);
+        $add->name                   = isset($data['name']) ? $data['name'] : null;
+        $add->phone                  = isset($data['phone']) ? $data['phone'] : null;
+        $add->postcode               = isset($data['postcode']) ? $data['postcode'] : null;
+        $add->license_number         = isset($data['license_number']) ? $data['license_number'] : null;
+        $add->email                  = isset($data['email']) ? $data['email'] : null;
+        $add->status                 = isset($data['status']) ? $data['status'] : 0;
+        $add->city_id                = isset($data['city_id']) ? $data['city_id'] : 0;
+        $add->address                = isset($data['address']) ? $data['address'] : 0;
+        $add->delivery_time          = isset($data['delivery_time']) ? $data['delivery_time'] : null;
+        $add->person_cost            = isset($data['person_cost']) ? $data['person_cost'] : null;
+        $add->lat                    = isset($data['lat']) ? $data['lat'] : null;
+        $add->lng                    = isset($data['lng']) ? $data['lng'] : null;
+        $add->type                   = isset($data['store_type']) ? $data['store_type'] : null;
+        $add->min_cart_value         = isset($data['min_cart_value']) ? $data['min_cart_value'] : null;
         $add->delivery_charges_value = isset($data['delivery_charges_value']) ? $data['delivery_charges_value'] : null;
+        if ($type === 'add') {
+            $add->sub_id                 = Auth::guard('admin')->user()->id;
+        }
+
 
         if (isset($data['admin'])) {
             $add->c_type                = isset($data['c_type']) ? $data['c_type'] : 0;

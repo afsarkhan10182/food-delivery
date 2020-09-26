@@ -219,4 +219,10 @@ class Admin extends Authenticatable
 		}
 	}
 
+	public function getSubAdminName($id)
+    {
+        $subadmin = Admin::find($id);
+        return $subadmin->name;
+    }
+
 }

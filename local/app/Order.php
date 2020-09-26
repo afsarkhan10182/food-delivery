@@ -43,6 +43,9 @@ class Order extends Authenticatable
       $add->notes          = isset($data['notes']) ? $data['notes'] : null;
       $add->save();
 
+      if ($restaurant_user->balance_amount < 1) {
+         $restaurant_user->status = 1;
+      }
       //update user table balance amount field
       $restaurant_user->balance_amount = $this->balanceAmount($add->balance_amount, $restaurant_user->id);
       $restaurant_user->save();
@@ -264,9 +267,12 @@ class Order extends Authenticatable
          if (isset($data['d_boy'])) {
             $query->where('orders.d_boy', $data['d_boy']);
          }
+         if (isset($data['sub_id'])) {
+            $query->where('users.sub_id', $data['sub_id']);
+         }
       })->join('app_user', 'orders.user_id', '=', 'app_user.id')
          ->join('users', 'orders.store_id', '=', 'users.id')
-         ->select('users.name as store', 'app_user.name as user', 'orders.*')
+         ->select('users.name as store', 'users.created_at as activated_date', 'users.balance_amount as collected_amount', 'users.sub_id as subadmin_id', 'app_user.name as user', 'orders.*')
          ->orderBy('orders.id', 'ASC')->get();
 
       $allData = [];
@@ -283,8 +289,10 @@ class Order extends Authenticatable
             'd_charges' => $row->d_charges,
             'notes' => $row->notes,
             'discount' => $row->discount,
-            'd_boy' => $row->d_boy
-
+            'd_boy' => $row->d_boy,
+            'activated_date' => $row->activated_date,
+            'collected_amount' => $row->collected_amount,
+            'subadmin_id' => $row->subadmin_id
          ];
       }
 

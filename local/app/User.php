@@ -24,6 +24,7 @@ class User extends Authenticatable
 
                 'name'      => 'required',
                 'phone'     => 'required|numeric',
+                'penalty_charge'     => 'required|numeric',
                 'img'       => 'mimes:jpeg,png,jpg,svg|max:2048',
                 'email'     => 'required|unique:users',
                 'password'  => 'required|min:6',
@@ -34,6 +35,7 @@ class User extends Authenticatable
 
                 'name'      => 'required',
                 'phone'     => 'required|numeric',
+                'penalty_charge'     => 'required|numeric',
                 'img'       => 'mimes:jpeg,png,jpg,svg|max:2048',
                 'email'     => 'required|unique:users,email,' . $type,
 
@@ -71,6 +73,7 @@ class User extends Authenticatable
         $add->address                = isset($data['address']) ? $data['address'] : 0;
         $add->delivery_time          = isset($data['delivery_time']) ? $data['delivery_time'] : null;
         $add->person_cost            = isset($data['person_cost']) ? $data['person_cost'] : null;
+        $add->penalty_charge         = isset($data['penalty_charge']) ? $data['penalty_charge'] : null;
         $add->lat                    = isset($data['lat']) ? $data['lat'] : null;
         $add->lng                    = isset($data['lng']) ? $data['lng'] : null;
         $add->type                   = isset($data['store_type']) ? $data['store_type'] : null;
@@ -204,7 +207,7 @@ class User extends Authenticatable
                 'title'         => $this->getLang($row->id, $_GET['lid'])['name'],
                 'img'           => Asset('upload/user/' . $row->img),
                 'address'       => $this->getLang($row->id, $_GET['lid'])['address'],
-                'open'          => $open,
+                'open'          => $row->balance_amount > 0 ? $open : false,
                 'trending'      => $row->trending,
                 'logo'          => $admin->logo ? Asset('upload/admin/' . $admin->logo) : null,
                 'phone'         => $row->phone,

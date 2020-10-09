@@ -31,9 +31,9 @@ class Order extends Authenticatable
       $add->lat            = $address->lat;
       $add->lng            = $address->lng;
       $add->address        = $address->address;
-      $add->d_charges      = $this->getTotal($data['cart_no'])['d_charges'];
-      $add->discount       = $this->getTotal($data['cart_no'])['discount'];
-      $add->total          = $this->getTotal($data['cart_no'])['total'];
+      $add->d_charges      = $this->getTotal($data)['d_charges'];
+      $add->discount       = $this->getTotal($data)['discount'];
+      $add->total          = $this->getTotal($data)['total'];
       $add->commision_type = $restaurant_user->c_type;
       $add->commision_value = $restaurant_user->c_value;
       $add->balance_amount = $restaurant_user->balance_amount;
@@ -47,8 +47,10 @@ class Order extends Authenticatable
          $restaurant_user->status = 1;
       }
       //update user table balance amount field
-      $restaurant_user->balance_amount = $this->balanceAmount($add->balance_amount, $restaurant_user->id);
-      $restaurant_user->save();
+      if ($restaurant_user->c_value > 0) {
+         $restaurant_user->balance_amount = $this->balanceAmount($add->balance_amount, $restaurant_user->id);
+         $restaurant_user->save();
+      }
 
       $item = new OrderItem;
       $item->addNew($add->id, $data['cart_no']);
@@ -93,14 +95,30 @@ class Order extends Authenticatable
       return Cart::where('cart_no', $cartNo)->first()->store_id;
    }
 
-   public function getTotal($cartNo)
+   public function getTotal($data)
    {
       $cart       = new Cart;
-      $item_total = $cart->getTotal($cartNo);
-      $d_charges  = $cart->d_charges($item_total, $cartNo);
-      $discount   = CartCoupen::where('cart_no', $cartNo)->sum('amount');
+      $item_total = $cart->getTotal($data['cart_no']);
+      $d_charges  = $cart->d_charges($item_total, $data['cart_no']);
+      $discount   = CartCoupen::where('cart_no', $data['cart_no'])->sum('amount');
       $total      = ($item_total - $discount) + $d_charges;
-
+      $sid        = Cart::where('cart_no', $data['cart_no'])->select('store_id')->distinct()->first();
+      if (isset($sid->store_id)) {
+         $user       = User::find($sid->store_id);
+      }
+      if (isset($data['user_id'])) {
+         $appUser    = AppUser::find($data['user_id']);
+         $isPenalty = $appUser->isPenalty;
+         if ($appUser->isPenalty == 1) {
+            $penalty_charge = $user->penalty_charge;
+         } else {
+            $penalty_charge = 0;
+         }
+      } else {
+         $penalty_charge = 0;
+         $isPenalty = 0;
+      }
+      $total += $penalty_charge;
       return ['total' => $total, 'discount' => $discount, 'd_charges' => $d_charges];
    }
 
@@ -232,7 +250,11 @@ class Order extends Authenticatable
       $res->status_by   = 3;
       $res->status_time    = date('d-M-Y') . ' | ' . date('h:i:A');
       $res->save();
-
+      $restaurant_user     = User::find($res->store_id);
+      if ($restaurant_user->c_value > 0) {
+         $restaurant_user->balance_amount = $res->balance_amount;
+         $restaurant_user->save();
+      }
       return ['data' => $this->history($res->user_id)];
    }
 

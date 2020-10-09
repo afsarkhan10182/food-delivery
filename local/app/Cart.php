@@ -137,12 +137,29 @@ class Cart extends Authenticatable
 
             ];
         }
+        $sid        = Cart::where('cart_no', $cartNo)->select('store_id')->distinct()->first();
+        if (isset($sid->store_id)) {
+            $user       = User::find($sid->store_id);
+        }
+        if (isset($_GET['user_id'])) {
+            $appUser    = AppUser::find($_GET['user_id']);
+            $isPenalty = $appUser->isPenalty;
+            if ($appUser->isPenalty == 1) {
+                $penalty_charge = $user->penalty_charge;
+            } else {
+                $penalty_charge = 0;
+            }
+        } else {
+            $penalty_charge = 0;
+            $isPenalty = 0;
+        }
 
         $item_total = $this->getTotal($cartNo);
         $d_charges  = $this->d_charges($item_total, $cartNo);
         $discount   = CartCoupen::where('cart_no', $cartNo)->sum('amount');
         $total      = ($item_total - $discount) + $d_charges;
-        $sid        = Cart::where('cart_no', $cartNo)->select('store_id')->distinct()->first();
+        $total += $penalty_charge;
+
         return [
 
             'data'           => $data,
@@ -150,6 +167,8 @@ class Cart extends Authenticatable
             'd_charges'      => $d_charges,
             'total'          => $total,
             'discount'       => $discount,
+            'isPenalty'      => $isPenalty,
+            'penalty_charge' => $penalty_charge,
             'store'          => isset($sid->store_id) ? $u->getLang($sid->store_id, $_GET['lid'])['name'] : [],
             'currency'       => Admin::find(1)->currency
 

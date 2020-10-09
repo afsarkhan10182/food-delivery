@@ -134,9 +134,9 @@
                 <label for="inputEmail4">Status</label>
                 <select name="status" class="form-control">
                     <option value="0" @if ($data->status == 0) selected </beautify
-                            end=" @endif">>Active</option>
+                            end="  @endif">>Active</option>
                     <option value="1" @if ($data->status == 1) selected </beautify
-                            end=" @endif">>Disbaled</option>
+                            end="  @endif">>Disbaled</option>
                 </select>
             </div>
         </div>
@@ -251,6 +251,13 @@
                                 <label for="inputEmail6">Approx Per Person Cost <small>(do not include any currency
                                         sign)</small></label>
                                 {!! Form::text('person_cost', null, ['placeholder' => 'e.g 200-250', 'class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail6">Penalty Charge<small>(This charge will add to user while
+                                        ordering)</small></label>
+                                {!! Form::text('penalty_charge', null, ['required' => 'required', 'class' => 'form-control']) !!}
                             </div>
                         </div>
                     </div>

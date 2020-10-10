@@ -143,11 +143,16 @@ class Cart extends Authenticatable
         }
         if (isset($_GET['user_id'])) {
             $appUser    = AppUser::find($_GET['user_id']);
-            $isPenalty = $appUser->isPenalty;
-            if ($appUser->isPenalty == 1) {
-                $penalty_charge = $user->penalty_charge;
+            if ($appUser) {
+                $isPenalty = $appUser->isPenalty;
+                if ($isPenalty == 1) {
+                    $penalty_charge = $user->penalty_charge;
+                } else {
+                    $penalty_charge = 0;
+                }
             } else {
                 $penalty_charge = 0;
+                $isPenalty = 0;
             }
         } else {
             $penalty_charge = 0;

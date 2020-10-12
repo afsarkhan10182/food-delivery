@@ -26,6 +26,7 @@
 <th>Store</th>
 <th>User</th>
 <th>Address</th>
+<th>Cancelled Reason(Penalty)</th>
 <th>Items</th>
 <th style="text-align: right">Option</th>
 </tr>
@@ -40,6 +41,7 @@
 <td width="12%">{{ $row->store }}</td>
 <td width="12%">{{ $row->name }}<br>{{ $row->phone }}</td>
 <td width="15%">{{ $row->address }},{{ $row->city }}</td>
+<td width="15%">{{ $row->cancelled_notes }}</td>
 <td width="40%">
 	
 <div class="row">

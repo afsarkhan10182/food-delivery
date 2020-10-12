@@ -70,6 +70,7 @@ class DboyController extends Controller
 		$res 		 = Order::find($_GET['id']);
 		$res->status = $_GET['status'];
 		$res->save();
+		$res->sendSms($_GET['id']);
 
 		if ($_GET['status'] == 5) {
 			$appUser = AppUser::find($res->user_id);

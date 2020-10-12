@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\User;
+<?php
+
+namespace App\Http\Controllers\User;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -15,7 +17,9 @@ use DB;
 use Validator;
 use Redirect;
 use IMS;
-class OrderController extends Controller {
+
+class OrderController extends Controller
+{
 
 	public $folder  = "user.order.";
 	/*
@@ -24,53 +28,44 @@ class OrderController extends Controller {
 	|---------------------------------------
 	*/
 	public function index()
-	{					
+	{
 		$res = new Order;
-		
-		if($_GET['status'] == 0)
-		{
+
+		if ($_GET['status'] == 0) {
 			$title = "New Orders";
-		}
-		elseif($_GET['status'] == 1)
-		{
+		} elseif ($_GET['status'] == 1) {
 			$title = "Running Orders";
-		}
-		elseif($_GET['status'] == 2)
-		{
+		} elseif ($_GET['status'] == 2) {
 			$title = "Cancelled Orders";
-		}
-		elseif($_GET['status'] == 3)
-		{
+		} elseif ($_GET['status'] == 3) {
 			$title = "Dispatched Orders";
-		}
-		elseif($_GET['status'] == 5)
-		{
+		} elseif ($_GET['status'] == 5) {
 			$title = "Completed Orders";
 		}
 
-		return View($this->folder.'index',[
+		return View($this->folder . 'index', [
 
-			'data' 		=> $res->getAll(null,Auth::user()->id),
+			'data' 		=> $res->getAll(null, Auth::user()->id),
 			'link' 		=> 'order/',
 			'title' 	=> $title,
 			'item'		=> new OrderItem,
-			'boys'		=> Delivery::where('status',0)->where('store_id',Auth::user()->id)->get(),
+			'boys'		=> Delivery::where('status', 0)->where('store_id', Auth::user()->id)->get(),
 			'form_url'	=> 'order/dispatched',
 			'currency'	=> Admin::find(1)->currency
 		]);
-	}	
+	}
 
 	public function orderStatus()
 	{
 		$res 				= Order::find($_GET['id']);
 		$res->status 		= $_GET['status'];
 		$res->status_by 	= 1;
-		$res->status_time 	= date('d-M-Y').' | '.date('h:i:A');
+		$res->status_time 	= date('d-M-Y') . ' | ' . date('h:i:A');
 		$res->save();
 
 		$res->sendSms($_GET['id']);
 
-		return Redirect::back()->with('message','Order Status Changed Successfully'); 
+		return Redirect::back()->with('message', 'Order Status Changed Successfully');
 	}
 
 	public function dispatched(Request $Request)
@@ -79,10 +74,12 @@ class OrderController extends Controller {
 		$res->status 		= 3;
 		$res->status_by 	= 1;
 		$res->d_boy 		= $Request->get('d_boy');
-		$res->status_time 	= date('d-M-Y').' | '.date('h:i:A');
+		$res->status_time 	= date('d-M-Y') . ' | ' . date('h:i:A');
 		$res->save();
 
-		return Redirect::back()->with('message','Order Status Changed Successfully'); 
+		$res->sendSms($Request->get('id'));
+
+		return Redirect::back()->with('message', 'Order Status Changed Successfully');
 	}
 
 	public function printBill($id)
@@ -90,12 +87,12 @@ class OrderController extends Controller {
 		$order = new Order;
 		$item  = new OrderItem;
 
-		return View('user.order.print',[
+		return View('user.order.print', [
 
-		'order' 	=> $order->signleOrder($id),
-		'items'		=> $item->getItem($id),
-		'currency'	=> Admin::find(1)->currency,
-		'it'		=> $item
+			'order' 	=> $order->signleOrder($id),
+			'items'		=> $item->getItem($id),
+			'currency'	=> Admin::find(1)->currency,
+			'it'		=> $item
 
 		]);
 	}
@@ -105,21 +102,21 @@ class OrderController extends Controller {
 		$order = Order::find($id);
 		$item  = new OrderItem;
 
-		return View($this->folder.'edit',[
+		return View($this->folder . 'edit', [
 
-		'data' 		=> $order,
-		'item'		=> Item::where('store_id',Auth::user()->id)->get(),
-		'detail'	=> $item->detail($id),
-		'form_url'	=> 'order/edit/'.$id,
-		'users'		=> User::get()
-		
+			'data' 		=> $order,
+			'item'		=> Item::where('store_id', Auth::user()->id)->get(),
+			'detail'	=> $item->detail($id),
+			'form_url'	=> 'order/edit/' . $id,
+			'users'		=> User::get()
+
 
 		]);
 	}
 
 	public function orderItem()
 	{
-		return View($this->folder.'item',['item' => Item::where('store_id',Auth::user()->id)->get(),'data' => new Order]);
+		return View($this->folder . 'item', ['item' => Item::where('store_id', Auth::user()->id)->get(), 'data' => new Order]);
 	}
 
 	public function getUnit($id)
@@ -128,9 +125,8 @@ class OrderController extends Controller {
 
 		$html = "<select name='unit[]'' class='form-control' required='required'>";
 
-		foreach($order->getUnit($id) as $u)
-		{
-			$html .= "<option value='".$u['id']."'>".$u['name']."</option>";
+		foreach ($order->getUnit($id) as $u) {
+			$html .= "<option value='" . $u['id'] . "'>" . $u['name'] . "</option>";
 		}
 
 		$html .= "</select>";
@@ -138,23 +134,23 @@ class OrderController extends Controller {
 		return $html;
 	}
 
-	public function _edit(Request $Request,$id)
+	public function _edit(Request $Request, $id)
 	{
 		$order = new Order;
 
-		$order->editOrder($Request->all(),$id);
+		$order->editOrder($Request->all(), $id);
 
-		return Redirect('order?status=1')->with('message','Order Edit Successfully');
+		return Redirect('order?status=1')->with('message', 'Order Edit Successfully');
 	}
 
 	public function add()
 	{
-		return View($this->folder.'add',[
+		return View($this->folder . 'add', [
 
-		'data' 		=> new Order,
-		'item'		=> Item::get(),
-		'form_url'	=> 'order/add',
-		'users'		=> User::get()
+			'data' 		=> new Order,
+			'item'		=> Item::get(),
+			'form_url'	=> 'order/add',
+			'users'		=> User::get()
 
 		]);
 	}
@@ -163,21 +159,18 @@ class OrderController extends Controller {
 	{
 		$order = new Order;
 
-		$order->editOrder($Request->all(),0);
+		$order->editOrder($Request->all(), 0);
 
-		return Redirect('order?status=1')->with('message','Order Added Successfully');
+		return Redirect('order?status=1')->with('message', 'Order Added Successfully');
 	}
 
 	public function getUser($phone)
 	{
-		$user = Order::where('phone',$phone)->first();
+		$user = Order::where('phone', $phone)->first();
 
-		if(isset($user->id))
-		{
-			$array = ['phone' => $user->phone,'name' => $user->name,'address' => $user->address];
-		}
-		else
-		{
+		if (isset($user->id)) {
+			$array = ['phone' => $user->phone, 'name' => $user->name, 'address' => $user->address, 'cancelled_reason' => $user->cancelled_notes];
+		} else {
 			$array = [];
 		}
 

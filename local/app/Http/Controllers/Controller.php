@@ -30,7 +30,7 @@ class Controller extends BaseController
 		}
 		
 		$fields = array(
-		'app_id' => "95318656-a674-4186-927f-9a2345bd45b1",
+		'app_id' => "95318656-a674-4186-927f-9a2345bd45b1", // dc5bdd0d-b87c-4c08-bb6e-255d43ab7d29
 		'included_segments' => array('All'),	
 		'filters' => [$daTags],
 		'data' => array("foo" => "bar"),
@@ -45,7 +45,7 @@ class Controller extends BaseController
 		
 		curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
-		'Authorization: Basic MjMwNDczYzltOGMwYS00ODU5LWlyNWltNzU4MTZhNTliNDNi'));
+		'Authorization: Basic MjMwNDczYzItOGMwYS00ODU5LWIyNWItNzU4MTZhNTliNDNi')); //  MDQ3NThlMjUtZmY2Ni00OGUyLWI1OGItYzA5NjkxMjEwYzAy
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_HEADER, FALSE);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
@@ -75,7 +75,7 @@ class Controller extends BaseController
 		}
 		
 		$fields = array(
-		'app_id' => "27ca042c-2d21-4065-91a1-319580f6fd46",
+		'app_id' => "95318656-a674-4186-927f-9a2345bd45b1", //27ca042c-2d21-4065-91a1-319580f6fd46
 		'included_segments' => array('All'),	
 		'filters' => [$daTags],
 		'data' => array("foo" => "bar"),
@@ -90,7 +90,7 @@ class Controller extends BaseController
 		
 		curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
-		'Authorization: Basic OWIyNmRkMDktNjY3Ny00ZDU0LWIwODYtZDM2ODk0MDhlYzg3'));
+		'Authorization: Basic MjMwNDczYzItOGMwYS00ODU5LWIyNWItNzU4MTZhNTliNDNi')); //OWIyNmRkMDktNjY3Ny00ZDU0LWIwODYtZDM2ODk0MDhlYzg3
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_HEADER, FALSE);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
@@ -120,7 +120,7 @@ class Controller extends BaseController
 		}
 		
 		$fields = array(
-		'app_id' => "7ebd04b2-9d31-4062-bdb5-4fe00c55c348",
+		'app_id' => "95318656-a674-4186-927f-9a2345bd45b1",//"7ebd04b2-9d31-4062-bdb5-4fe00c55c348",
 		'included_segments' => array('All'),	
 		'filters' => [$daTags],
 		'data' => array("foo" => "bar"),
@@ -135,7 +135,7 @@ class Controller extends BaseController
 		
 		curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
-		'Authorization: Basic ZTVkY2JmNTktMGNhMC00OTRiLThlZjAtODU3Mjg1OTAzZmM0'));
+		'Authorization: Basic MjMwNDczYzItOGMwYS00ODU5LWIyNWItNzU4MTZhNTliNDNi')); //ZTVkY2JmNTktMGNhMC00OTRiLThlZjAtODU3Mjg1OTAzZmM0
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_HEADER, FALSE);
 		curl_setopt($ch, CURLOPT_POST, TRUE);

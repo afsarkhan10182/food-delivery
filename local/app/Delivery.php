@@ -55,6 +55,9 @@ class Delivery extends Authenticatable
         $add->name              = isset($data['name']) ? $data['name'] : null;
         $add->phone             = isset($data['phone']) ? $data['phone'] : null;
         $add->status            = isset($data['status']) ? $data['status'] : 0;
+        $add->start_time        = isset($data['start_time']) ? $data['start_time'] : null;
+        $add->end_time          = isset($data['end_time']) ? $data['end_time'] : null;
+        $add->address           = isset($data['address']) ? $data['address'] : null;
 
         if (isset($data['password'])) {
             $add->password      = bcrypt($data['password']);

@@ -49,7 +49,7 @@ class OrderController extends Controller
 			'link' 		=> 'order/',
 			'title' 	=> $title,
 			'item'		=> new OrderItem,
-			'boys'		=> Delivery::where('status', 0)->where('store_id', Auth::user()->id)->get(),
+			'boys'		=> Delivery::where('status', 0)->where('store_id', Auth::user()->id)->where('start_time', '<=', date('H:i'))->where('end_time', '>=', date('H:i'))->get(),
 			'form_url'	=> 'order/dispatched',
 			'currency'	=> Admin::find(1)->currency
 		]);

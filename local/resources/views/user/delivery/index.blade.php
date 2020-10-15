@@ -26,6 +26,7 @@
 <th>Name</th>
 <th>Phone</th>
 <th>Password</th>
+<th>Start - End (Available time)</th>
 <th>Status</th>
 <th style="text-align: right">Option</th>
 </tr>
@@ -39,6 +40,7 @@
 <td width="17%">{{ $row->name }}</td>
 <td width="17%">{{ $row->phone }}</td>
 <td width="17%">{{ $row->shw_password }}</td>
+<td width="17%">{{ $row->start_time }} - {{ $row->end_time }}</td>
 <td width="17%">
 
 @if($row->status == 0)
